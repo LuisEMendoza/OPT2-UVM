@@ -1,0 +1,146 @@
+---
+title: "Administración de proyectos: CPM / PERT"
+---
+
+- Los proyectos modernos, en rangos que van desde construir un centro comercial suburbano hasta poner un hombre en la luna, son extremadamente grandes, complejos y costosos. 
+- No es tarea fácil terminar dichos proyectos a tiempo y dentro del presupuesto. 
+- Los complicados problemas para programar dichos proyectos a menudo quedan estructurados debido a la interdependencia de las actividades. 
+- No es posible iniciar ciertas actividades antes de que otras hayan sido terminadas. Al tratar con proyectos que con toda posibilidad involucran miles de dichas relaciones de dependencia, no es sorprendente que los administradores busquen métodos de análisis efectivos.
+
+## Preguntas clave
+1. ¿Cuál es la fecha esperada de terminación del proyecto?
+2. ¿Cuál es la “variabilidad” potencial de esta fecha?
+3. ¿Cuáles son las fechas de inicio y terminación programadas para cada actividad específica?
+4. ¿Qué actividades son críticas, en el sentido de que deben ser terminadas exactamente como fueron programadas, a fin de cumplir el objetivo de terminación general del proyecto?
+5. ¿Cuánto tiempo pueden retrasarse las actividades no críticas, antes de que se incurra en un retraso en la fecha de terminación general?
+6. ¿Cómo pueden concentrarse más eficientemente los recursos en actividades, a fin de acelerar la terminación del proyecto?
+7. ¿Qué control se debe ejercer en el flujo de gastos para las diversas actividades a lo largo del proyecto, a fin de que el presupuesto general se pueda cumplir?
+
+__PERT__ y __CPM__, siglas de _Program Evaluation Review Technique_ (Técnica de revisión y evaluación de programas) y _Critical Path Method_ (Método de la ruta crítica), respectivamente, darán las respuestas a estas preguntas. Cada uno de estos métodos de programación representa un proyecto como una red, que iremos construyendo conforme avancemos.
+
+Es importante aclarar que CPM es un método aplicable solo cuando conocemos con certeza la duración de las actividades que se ejecutarán. Por el otro lado, PERT es el que se usa cuando tenemos tiempos probables de ejecución. Esto define a CPM como un método determinista y a PERT como probabilístico.
+
+## Ejemplo de una red CPM
+Veamos a continuación un proyecto que cuenta con actividades cuyos tiempos de ejecución son conocidos.
+
+_El traslado inminente de la operación de las tarjetas de crédito hacia otra ciudad, desde la actual oficina central, es un proyecto importante para una compañía bancaria. La mesa directiva ha establecido como fecha límite 22 semanas para que el traslado esté terminado. Usted está a cargo de planear el traslado, de verificar que todo resulte de acuerdo con el plan y de asegurarse de que el plazo fijado se cumpla._
+_El traslado es difícil de coordinar porque involucra muchas divisiones diferentes de la compañía. “Bienes raíces” tiene que seleccionar uno de tres sitios posibles para las oficinas. “Personal” tiene que determinar qué empleados se mudarán, cuántos nuevos empleados se contratarán y quién los va a capacitar. El grupo de sistemas y la oficina del tesorero deben organizar y poner en práctica los procedimientos de operación y los arreglos financieros para la nueva operación. Los arquitectos tendrán que diseñar el espacio interior y supervisar las mejoras estructurales que se necesiten. Cada uno de los sitios que se están considerando es un edificio existente, con la cantidad apropiada de espacio libre. Sin embargo, se deberán adquirir las divisiones entre oficinas, las instalaciones de computadoras, los muebles, y así sucesivamente._
+_Un segundo factor de complicación es que existe interdependencia entre las actividades. En otras palabras, algunas partes del proyecto no pueden iniciarse hasta que otras estén terminadas. Considere dos ejemplos obvios: no puede montar el interior de una oficina antes de que ésta sea diseñada. Tampoco puede contratar nuevos empleados hasta que haya determinado cuáles son los requerimientos de personal._
+
+El primer paso en el proceso es definir las actividades del proyecto y establecer las relaciones de precedencia apropiadas. Éste es un primer paso importante, ya que errores u omisiones en esta etapa pueden llevar a una programación desastrosamente imprecisa.
+En la tabla siguiente se muestra la primera lista de actividades que se prepara para el traslado (las columnas llamadas “Tiempo” y “Recursos” son indicadores de elementos por considerar). Ésta es la parte más importante de cualquier proyecto PERT o CPM y usualmente se lleva a cabo involucrando a varias personas, de forma que no se pasen por alto actividades importantes. Todo el trabajo debe ser un esfuerzo de equipo, no un esfuerzo individual.
+
+ACTIVIDAD | DESCRIPCIÓN | PREDECESORES | TIEMPO | RECURSOS
+:---:| --- | :---: | :---: | ---
+A | Seleccionar sitio de oficinas | - | 3 |
+B | Crear plan organizacional y financiero | -  | 5  |
+C | Determinar requerimientos de personal | B | 3  |
+D | Diseñar la instalación |  A, C | 4 |
+E | Construir el interior | D | 8 |
+F | Seleccionar al personal que se va a transferir | C  | 2 |
+G | Contratar nuevos empleados |F  |  4 |
+H | Trasladar registros, personal clave, etc |F  | 2|
+I | Hacer arreglos financieros con otras instituciones |B  |  5|
+J | Capacitar nuevo personal |H, E, G  |3  |
+
+## Ejemplo de un problema PERT
+En el caso anterior sabíamos exactamente la duración de las tareas a ejecutarse. Eso nos permitía saber la duración exacta del proyecto. Sin embargo, cuando esto no es posible, deberán estimarse al menos tres duraciones probables, en tres diferentes escenarios:
+
+- __Tiempo optimista__ (denotado como a): el tiempo mínimo. Todo tiene que salir perfectamente para lograr este tiempo.
+- __Tiempo más probable__ (denotado como m): el tiempo más factible. El tiempo requerido bajo circunstancias normales.
+- __Tiempo pesimista__ (denotado como b): el tiempo máximo. Una versión de la Ley de Murphy es que si algo puede salir mal, saldrá mal. El tiempo pesimista es el tiempo requerido cuando la Ley de Murphy entra en vigor.
+
+Esto causa que no podamos decir con exactitud la duración, si no solo dar posibles duraciones. Es decir, podremos decir la probabilidad de terminar el proyecto en un tiempo dado, nada más. Consideremos el proyecto anterior con algunas modificaciones que le traen incertidumbre:
+
+ACTIVIDAD | DESCRIPCIÓN | PREDECESORES | a|m|b | Tiempo esperado|Varianza
+:---:| --- | :---: | :---: | :---:|:---:|:---:|:---:
+A | Seleccionar sitio de oficinas | - | 1 |3|5
+B | Crear plan organizacional y financiero | -  |3|4.5|9
+C | Determinar requerimientos de personal | B |2| 3 |4
+D | Diseñar la instalación |  A, C |2|4|6
+E | Construir el interior | D |4|7|16
+F | Seleccionar al personal que se va a transferir | C  | 1|1.5|5
+G | Contratar nuevos empleados |F  |2.5|3.5|7.5
+H | Trasladar registros, personal clave, etc |F  |1|2|3
+I | Hacer arreglos financieros con otras instituciones |B | 4| 5|6
+J | Asegurar la capacitación | F |1.5|3|4.5
+K | Capacitar nuevo personal | G, J  |1|3|5 |
+
+La red se construye exactamente igual a como sería una del tipo CPM, con la salvedad de que no determinaremos la duración de la misma manera. Deben calcularse los tiempos esperados, lo cual se hace con la siguiente fórmula:
+
+$$
+tiempo\ esperado= \frac{a+4m+b}{6}
+$$
+Los tiempos esperados serán los valores con los que se calculará la duración del proyecto. Cuando hayamos obtenido la duración esperada y las actividades críticas, podemos ya calcular la varianza de las tareas críticas solamente, cuya fórmula es:
+
+$$
+\sigma^2= \frac{(b-a)^2}{36}
+$$
+Las varianzas se suman y al resultado le calculamos la raíz cuadrada. Eso será la desviación estándar. La necesitaremos para el cálculo de la probabilidad:
+
+$$
+Z= \frac{T-\mu}{\sigma}
+$$
+```{r}
+pnorm(22, mean = 20, sd=2.357)
+```
+
+
+### Ejercicio
+Se construye una lujosa residencia y la coordinación del arquitecto y los subcontratistas requerirá un esfuerzo importante para cumplir con la fecha de terminación de 44 semanas (aproximadamente 10 meses) solicitada por el propietario. El gerente del proyecto preparó la siguiente tabla de duración de las tareas del proyecto.
+
+
+Actividad | Predecesora | Optimista | Más probable | Pesimista 
+--- | :---: |  :---: |  :---: |  :---:
+A | - | 4 | 8 | 12
+B | A | 6 | 7 | 8
+C | A | 6 | 12 | 18
+D | A | 3 | 5 | 7
+E | C,D | 6 | 9 | 18
+F | B,C | 5 | 8 | 17
+G | E,F | 10 | 15 | 20
+H | F,G | 5 | 6 | 13
+
+1. Determine la ruta crítica. 
+2. ¿Cuál es el tiempo de terminación del proyecto esperado?
+3. ¿Cuál es la probabilidad de que el proyecto se termine en las 44 semanas solicitadas
+por el propietario?
+4. ¿Cuál es la probabilidad de que el proyecto de construcción pudiera retrasarse más de tres meses? Utilice 57 semanas para este cálculo.
+5. ¿Qué deberá decirle la compañía constructora al propietario?
+ 
+ 
+## Consideración de intercambios entre tiempo y dinero
+Los desarrolladores del método CPM permitieron agregar recursos a ciertas actividades, con el objetivo de disminuir el tiempo de ejecución de las mismas. Los recursos pueden ser más trabajadores, tiempo extra, maquinaria adicional, etcétera. Estos recursos, al ser agregados obviamente implican mayores costos, por lo que el encargado del proyecto debe sopesar si es más conveniente inyectar dinero a cambio de ahorro de tiempo.
+
+La siguiente tabla define un proyecto de mantenimiento de dos máquinas que consta de cinco actividades. Como la gerencia ha tenido una experiencia significativa con proyectos similares, los tiempos de las actividades de mantenimiento se consideran conocidos; por consiguiente, para cada actividad se da una estimación de tiempo única. El procedimiento de calcular la ruta crítica para la red del proyecto de mantenimiento es el mismo que se utilizó para determinar la ruta crítica en las redes anteriores.
+
+Actividad|Descripción|Predecesora|Tiempo normal|Tiempo abatido|Costo normal|Costo abatido|Reducción máxima de tiempo|Costo de compresión por día
+:---:|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:
+A|Reparar la máquina I|-|7|4|500|800| |
+B|Ajustar la máquina I|A|3|2|200|350| | 
+C|Reparar la máquina II|-|6|4|500|900| |
+D|Ajustar la máquina II|C|3|1|200|500| |
+E|Probar el sistema|B,D|2|1|300|550| |
+
+La reducción máxima posible se calcula con la siguiente expresión:
+
+$$
+M_i=\tau_i-\tau'_i
+$$
+
+Donde: 
+
+- $M_i$ = reducción máxima posible del tiempo de la actividad $i$ debido a la compresión.
+- $\tau_i$ = tiempo esperado de la actividad $i$.
+- $\tau'_i$ = tiempo de la actividad $i$ con abatimiento máximo.
+
+El costo de compresión por unidad de tiempo se obtiene mediante:
+
+$$
+K_i=\frac{C'_i-C_i}{M_i}
+  $$
+
+Donde:
+
+- $C_i$ = es el costo de la actividad $i$ en el tiempo normal.
+- $C'_i$ = es el costo de la actividad $i$ con compresión máxima.
