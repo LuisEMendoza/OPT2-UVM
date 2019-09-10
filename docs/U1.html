@@ -747,12 +747,138 @@ M_i=\tau_i-\tau&#39;_i
 <p>El costo de compresión por unidad de tiempo se obtiene mediante:</p>
 <p><span class="math display">\[
 K_i=\frac{C&#39;_i-C_i}{M_i}
-  \]</span></p>
+\]</span></p>
 <p>Donde:</p>
 <ul>
 <li><span class="math inline">\(C_i\)</span> = es el costo de la actividad <span class="math inline">\(i\)</span> en el tiempo normal.</li>
 <li><span class="math inline">\(C&#39;_i\)</span> = es el costo de la actividad <span class="math inline">\(i\)</span> con compresión máxima.</li>
 </ul>
+<div id="construccion-del-modelo" class="section level4">
+<h4>Construcción del modelo</h4>
+<p>Primero debemos calcular la reducción máxima del tiempo y el costo de compresión por día, por medio de las fórmulas mostradas con anterioridad:</p>
+<table>
+<colgroup>
+<col width="11%" />
+<col width="9%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Actividad</th>
+<th align="left">Descripción</th>
+<th align="center">Predecesora</th>
+<th align="center">Tiempo normal</th>
+<th align="center">Tiempo abatido</th>
+<th align="center">Costo normal</th>
+<th align="center">Costo abatido</th>
+<th align="center">Reducción máxima de tiempo</th>
+<th align="center">Costo de compresión por día</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">A</td>
+<td align="left">Reparar la máquina I</td>
+<td align="center">-</td>
+<td align="center">7</td>
+<td align="center">4</td>
+<td align="center">500</td>
+<td align="center">800</td>
+<td align="center">3</td>
+<td align="center">100</td>
+</tr>
+<tr class="even">
+<td align="center">B</td>
+<td align="left">Ajustar la máquina I</td>
+<td align="center">A</td>
+<td align="center">3</td>
+<td align="center">2</td>
+<td align="center">200</td>
+<td align="center">350</td>
+<td align="center">1</td>
+<td align="center">150</td>
+</tr>
+<tr class="odd">
+<td align="center">C</td>
+<td align="left">Reparar la máquina II</td>
+<td align="center">-</td>
+<td align="center">6</td>
+<td align="center">4</td>
+<td align="center">500</td>
+<td align="center">900</td>
+<td align="center">2</td>
+<td align="center">200</td>
+</tr>
+<tr class="even">
+<td align="center">D</td>
+<td align="left">Ajustar la máquina II</td>
+<td align="center">C</td>
+<td align="center">3</td>
+<td align="center">1</td>
+<td align="center">200</td>
+<td align="center">500</td>
+<td align="center">2</td>
+<td align="center">150</td>
+</tr>
+<tr class="odd">
+<td align="center">E</td>
+<td align="left">Probar el sistema</td>
+<td align="center">B,D</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">300</td>
+<td align="center">550</td>
+<td align="center">1</td>
+<td align="center">250</td>
+</tr>
+</tbody>
+</table>
+<p>Para el modelo debemos considerar qu cuando una actividad empieza en su tiempo de inicio más temprano, entonces:</p>
+<blockquote>
+<p>El tiempo de terminación debe ser mayor o igual al tiempo de inicio más temprano más el tiempo de ejecución de actividad.</p>
+</blockquote>
+<p>Consideremos la tarea <span class="math inline">\(A\)</span>, cuyo tiempo esperado es de 7 días. Sea <span class="math inline">\(x_A=\)</span> tiempo de terminación de la actividad <span class="math inline">\(A\)</span> y <span class="math inline">\(y_A=\)</span> cantidad de tiempo en que la actividad <span class="math inline">\(A\)</span> es comprimida. Si asumimos que el proyecto se inicia en el tiempo 0, el tiempo de inicio más temprano de la actividad <span class="math inline">\(A\)</span> es 0. Como el tiempo de la actividad <span class="math inline">\(A\)</span> se reduce en la cantidad de tiempo que la actividad <span class="math inline">\(A\)</span> es comprimida, su tiempo de terminación debe satisfacer la relación</p>
+<p><span class="math display">\[
+x_A\geq 0+(7-y_A)
+\]</span></p>
+<p>Recordemos que en todas las expresiones de los modelos de programación lineal no deben existir variables en su lado derecho. Por lo tanto, debemos trasladar <span class="math inline">\(y_A\)</span> al lado izquierdo:</p>
+<p><span class="math display">\[
+x_A+y_A \geq7
+\]</span></p>
+<pre class="r"><code>ct &lt;- read.csv(&quot;datasets/001-Problema.csv&quot;, sep = &quot;,&quot;)
+ct</code></pre>
+<pre><code>##    XA XB XC XD XE  YA  YB  YC  YD  YE DIR  M
+## 1   0  0  0  0  0 100 150 200 150 250     NA
+## 2   1 NA NA NA NA   1  NA  NA  NA  NA  &gt;=  7
+## 3  -1  1 NA NA NA  NA   1  NA  NA  NA  &gt;=  3
+## 4  NA NA  1 NA NA  NA  NA   1  NA  NA  &gt;=  6
+## 5  NA NA -1  1 NA  NA  NA  NA   1  NA  &gt;=  3
+## 6  NA -1 NA NA  1  NA  NA  NA  NA   1  &gt;=  2
+## 7  NA NA NA -1  1  NA  NA  NA  NA   1  &gt;=  2
+## 8  NA NA NA NA  1  NA  NA  NA  NA  NA  &lt;= 10
+## 9  NA NA NA NA NA   1  NA  NA  NA  NA  &lt;=  3
+## 10 NA NA NA NA NA  NA   1  NA  NA  NA  &lt;=  1
+## 11 NA NA NA NA NA  NA  NA   1  NA  NA  &lt;=  2
+## 12 NA NA NA NA NA  NA  NA  NA   1  NA  &lt;=  2
+## 13 NA NA NA NA NA  NA  NA  NA  NA   1  &lt;=  1</code></pre>
+<p>Debemos cargar la biblioteca <em>lpSolve</em> y capturar los comandos necesarios para su resolución:</p>
+<pre class="r"><code>library(lpSolve)
+fo &lt;- c(ct[1,1:10])
+matriz &lt;- ct[2:13,1:10]
+direcciones &lt;- ct[2:13,11]
+constantes &lt;- ct[2:13,12]
+solucion &lt;- lp(&quot;min&quot;, fo, matriz, direcciones, constantes)
+solucion</code></pre>
+<pre><code>## Success: the objective function is 350</code></pre>
+<pre class="r"><code>solucion$solution</code></pre>
+<pre><code>##  [1]  5  8  6  8 10  2  0  0  1  0</code></pre>
+</div>
 </div>
 
 
