@@ -879,6 +879,122 @@ solucion</code></pre>
 <pre class="r"><code>solucion$solution</code></pre>
 <pre><code>##  [1]  5  8  6  8 10  2  0  0  1  0</code></pre>
 </div>
+<div id="ejercicio-1" class="section level4">
+<h4>Ejercicio</h4>
+<p>Norton está instalando un nuevo sistema de cómputo. Las actividades, el tiempo de actividad, y el proyecto de red, son como sigue:</p>
+<table>
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Actividad</th>
+<th align="center">Predecesora</th>
+<th align="center">Tiempo normal</th>
+<th align="center">Tiempo abatido</th>
+<th align="center">Costo normal</th>
+<th align="center">Costo abatido</th>
+<th align="center">Reducción máxima de tiempo</th>
+<th align="center">Costo de compresión por día</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">A</td>
+<td align="center">-</td>
+<td align="center">3</td>
+<td align="center">1</td>
+<td align="center">900</td>
+<td align="center">1700</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">B</td>
+<td align="center">-</td>
+<td align="center">6</td>
+<td align="center">3</td>
+<td align="center">2000</td>
+<td align="center">4000</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="center">C</td>
+<td align="center">A</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">500</td>
+<td align="center">1000</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">D</td>
+<td align="center">B, C</td>
+<td align="center">5</td>
+<td align="center">3</td>
+<td align="center">1800</td>
+<td align="center">2400</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="center">E</td>
+<td align="center">D</td>
+<td align="center">4</td>
+<td align="center">3</td>
+<td align="center">1500</td>
+<td align="center">1850</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">F</td>
+<td align="center">E</td>
+<td align="center">3</td>
+<td align="center">1</td>
+<td align="center">3000</td>
+<td align="center">3900</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="center">G</td>
+<td align="center">B, C</td>
+<td align="center">9</td>
+<td align="center">4</td>
+<td align="center">8000</td>
+<td align="center">9800</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">H</td>
+<td align="center">F, G</td>
+<td align="center">3</td>
+<td align="center">2</td>
+<td align="center">1000</td>
+<td align="center">2000</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p>El cálculo de ruta crítica muestra que <em>B-D-E-F-H</em> es la ruta crítica y que el tiempo de terminación del proyecto esperado es de 21 semanas. Después de revisar esta información, la gerencia afirmó que se utilizará tiempo extra para completar el proyecto en 16 semanas.</p>
+<ol style="list-style-type: decimal">
+<li>Formule un modelo de programación lineal que pueda ser utilizado para tomar las decisiones de comprimir este proyecto.</li>
+<li>Resuelva el modelo de programación lineal y tome las decisiones de compresión de costos mínimos. ¿Cuál es el costo agregado de cumplir el tiempo de terminación de 16 semanas?</li>
+<li>Desarrolle un programa de actividades completo basado en los tiempos de actividad comprimidos.</li>
+</ol>
+</div>
 </div>
 
 

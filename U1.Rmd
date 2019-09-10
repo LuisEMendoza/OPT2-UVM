@@ -190,3 +190,26 @@ solucion <- lp("min", fo, matriz, direcciones, constantes)
 solucion
 solucion$solution
 ```
+
+#### Ejercicio
+
+Norton está instalando un nuevo sistema de cómputo. Las actividades, el tiempo de actividad, y el proyecto de red, son como sigue:
+
+Actividad|Predecesora|Tiempo normal|Tiempo abatido|Costo normal|Costo abatido|Reducción máxima de tiempo|Costo de compresión por día
+:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:
+A|-|3|1|900|1700| |
+B|-|6|3|2000|4000| | 
+C|A|2|1|500|1000| |
+D|B, C|5|3|1800|2400| |
+E|D|4|3|1500|1850| |
+F|E|3|1|3000|3900| |
+G|B, C|9|4|8000|9800| |
+H|F, G|3|2|1000|2000| |
+
+El cálculo de ruta crítica muestra que _B-D-E-F-H_ es la ruta crítica y que el tiempo de terminación del proyecto esperado es de 21 semanas. Después de revisar esta información, la gerencia afirmó que se utilizará tiempo extra para completar el proyecto en 16 semanas. 
+
+1. Formule un modelo de programación lineal que pueda ser utilizado para tomar las decisiones de comprimir este proyecto.
+2. Resuelva el modelo de programación lineal y tome las decisiones de compresión de costos mínimos. ¿Cuál es el costo agregado de cumplir el tiempo de terminación de 16 semanas?
+3. Desarrolle un programa de actividades completo basado en los tiempos de actividad comprimidos.
+
+
