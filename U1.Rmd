@@ -136,11 +136,57 @@ Donde:
 
 El costo de compresión por unidad de tiempo se obtiene mediante:
 
+
 $$
 K_i=\frac{C'_i-C_i}{M_i}
-  $$
+$$
 
 Donde:
 
 - $C_i$ = es el costo de la actividad $i$ en el tiempo normal.
 - $C'_i$ = es el costo de la actividad $i$ con compresión máxima.
+
+#### Construcción del modelo
+Primero debemos calcular la reducción máxima del tiempo y el costo de compresión por día, por medio de las fórmulas mostradas con anterioridad:
+
+Actividad|Descripción|Predecesora|Tiempo normal|Tiempo abatido|Costo normal|Costo abatido|Reducción máxima de tiempo|Costo de compresión por día
+:---:|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:
+A|Reparar la máquina I|-|7|4|500|800|3 |100
+B|Ajustar la máquina I|A|3|2|200|350| 1|150
+C|Reparar la máquina II|-|6|4|500|900| 2|200
+D|Ajustar la máquina II|C|3|1|200|500| 2|150
+E|Probar el sistema|B,D|2|1|300|550| 1|250
+
+Para el modelo debemos considerar qu cuando una actividad empieza en su tiempo de inicio más temprano, entonces:
+
+> El tiempo de terminación debe ser mayor o igual al tiempo de inicio más temprano más el tiempo de ejecución de actividad.
+
+Consideremos la tarea $A$, cuyo tiempo esperado es de 7 días. Sea $x_A=$ tiempo de terminación de la actividad $A$ y $y_A=$ cantidad de tiempo en que la actividad $A$ es comprimida. Si asumimos que el proyecto se inicia en el tiempo 0, el tiempo de inicio más temprano de la actividad $A$ es 0. Como el tiempo de la actividad $A$ se reduce en la cantidad de tiempo que la actividad $A$ es comprimida, su tiempo de terminación debe satisfacer la relación
+
+$$
+x_A\geq 0+(7-y_A)
+$$
+
+Recordemos que en todas las expresiones de los modelos de programación lineal no deben existir variables en su lado derecho. Por lo tanto, debemos trasladar $y_A$ al lado izquierdo:
+
+$$
+x_A+y_A \geq7
+$$
+
+```{r}
+ct <- read.csv("datasets/001-Problema.csv", sep = ",")
+ct
+```
+
+Debemos cargar la biblioteca _lpSolve_ y capturar los comandos necesarios para su resolución:
+
+```{r}
+library(lpSolve)
+fo <- c(ct[1,1:10])
+matriz <- ct[2:13,1:10]
+direcciones <- ct[2:13,11]
+constantes <- ct[2:13,12]
+solucion <- lp("min", fo, matriz, direcciones, constantes)
+solucion
+solucion$solution
+```
