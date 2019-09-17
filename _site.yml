@@ -7,12 +7,14 @@
     - text: "¿Cómo utilizar estos apuntes?"
       href: Ayuda.html
     - text: "Git y GitHub en RStudio"
-      href: GitHub-en-RStudio.html
+      href: GitHub_en_RStudio.html
     - text: "Contenido" 
       menu:
         - text: "Optimización II"
         - text: "Unidad 1"
           href: U1.html
+        - text: "Unidad 2"
+          href: U2.html
   output:
     html_document:
         theme: cosmo
