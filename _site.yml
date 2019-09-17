@@ -13,6 +13,8 @@
         - text: "Optimización II"
         - text: "Unidad 1"
           href: U1.html
+        - text: "Unidad 2"
+          href: U2.html
   output:
     html_document:
         theme: cosmo
