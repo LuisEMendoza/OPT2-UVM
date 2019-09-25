@@ -316,17 +316,17 @@ $(document).ready(function () {
 <div id="introduccion" class="section level2">
 <h2>Introducción</h2>
 <p>La idea principal de la programación dinámica (PD) es descomponer el problema en subproblemas (más manejables). Los cálculos se realizan entonces recursivamente donde la solución óptima de un subproblema se utiliza como dato de entrada al siguiente problema. La solución para todo el problema está disponible cuando se soluciona el último subproblema. La forma en que se realizan los cálculos recursivos depende de cómo se descomponga el problema original. En particular, normalmente los subproblemas están vinculados por restricciones comunes. La factibilidad de estas restricciones comunes se mantiene en todas las iteraciones.</p>
-<div id="problema-de-la-ruta-mas-corta" class="section level3">
-<h3>Problema de la ruta más corta</h3>
+</div>
+<div id="problema-de-la-ruta-mas-corta" class="section level2">
+<h2>Problema de la ruta más corta</h2>
 <p>Supongamos que deseamos seleccionar la ruta por carretera más corta entre dos ciudades. La red en la figura siguiente proporciona las posibles rutas entre la ciudad de inicio en el nodo 1 y la ciudad destino en el nodo 7. Las rutas pasan por ciudades intermedias designadas por los nodos 2 a 6.</p>
 <div class="figure">
-<img src="images/018-PD.png" alt="" />
+<img src="images/018-PD.png" alt="Red de rutas para el ejemplo" />
 <p class="caption"><em>Red de rutas para el ejemplo</em></p>
 </div>
 <p>Podemos resolver este problema enumerando todas las rutas entre los nodos 1 y 7 (hay cinco rutas). Sin embargo, la enumeración exhaustiva es computacionalmente insoluble en redes grandes.</p>
 <p>Para resolver el problema por PD, primero lo descomponemos en etapas. A continuación, realizamos por separado los cálculos en cada etapa.</p>
 <p>La idea general para determinar la ruta más corta es calcular las distancias (acumulativas) más cortas a todos los nodos terminales de una etapa, y luego utilizarlas como datos de entrada a la etapa inmediatamente subsiguiente. Partiendo del nodo 1, la etapa 1 llega a tres nodos terminales (2, 3 y 4) y sus cálculos son simples.</p>
-</div>
 <div id="propiedades-basicas-de-los-calculos-de-pd." class="section level3">
 <h3>Propiedades básicas de los cálculos de PD.</h3>
 <ol style="list-style-type: decimal">
@@ -365,6 +365,20 @@ d(6, 7) = 9
 </div>
 </div>
 </div>
+</div>
+<div id="recursividad-hacia-delante-avance-y-hacia-atras-retroceso" class="section level2">
+<h2>Recursividad hacia delante (avance) y hacia atrás (retroceso)</h2>
+<p>El primer ejemplo utiliza la recursividad hacia adelante en la cual los cálculos proceden de la etapa 1 a la etapa 3. El mismo ejemplo puede resolverse por medio de recursividad hacia atrás, comenzando en la etapa 3 y terminando en la etapa 1.</p>
+<div class="figure">
+<img src="images/018-PD.png" alt="Red de rutas para el ejemplo" />
+<p class="caption"><em>Red de rutas para el ejemplo</em></p>
+</div>
+<p>La ecuación recursiva inversa es:</p>
+<p><span class="math display">\[
+f_4(x_4=7)=0\\
+f_i(x_i)=mín_{rutas\ factibles} \{d(x_i,x_{i+1})+f_{i+1}(x_{i+1})\}, i=1,2,3
+\]</span></p>
+<p>El orden de los cálculos es <span class="math inline">\(f_3\rightarrow f_2\rightarrow f_1\)</span>.</p>
 </div>
 
 
