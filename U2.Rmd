@@ -6,7 +6,7 @@ title: "Programación dinámica"
 
 La idea principal de la programación dinámica (PD) es descomponer el problema en subproblemas (más manejables). Los cálculos se realizan entonces recursivamente donde la solución óptima de un subproblema se utiliza como dato de entrada al siguiente problema. La solución para todo el problema está disponible cuando se soluciona el último subproblema. La forma en que se realizan los cálculos recursivos depende de cómo se descomponga el problema original. En particular, normalmente los subproblemas están vinculados por restricciones comunes. La factibilidad de estas restricciones comunes se mantiene en todas las iteraciones.
 
-### Problema de la ruta más corta
+## Problema de la ruta más corta
 
 Supongamos que deseamos seleccionar la ruta por carretera más corta entre dos ciudades. La red en la figura siguiente proporciona las posibles rutas entre la ciudad de inicio en el nodo 1 y la ciudad destino en el nodo 7. Las rutas pasan por ciudades intermedias designadas por los nodos 2 a 6.
 
@@ -61,3 +61,17 @@ $$
 ##### Ejercicio 2
 
 Soy un ávido excursionista. El verano pasado, mi amigo G. Don y yo nos fuimos de campamento durante 5 días a las hermosas _White Mountains_ en _New Hampshire_. Decidimos limitar nuestra excursión a tres picos muy conocidos: Los montes _Washington_, _Jefferson_ y _Adams_. El monte Washington tiene un sendero de 6 millas de la base a la cumbre. Los senderos correspondientes de los montes Jefferson y Adams son de 4 y 5 millas. Los senderos que conectan las bases de las tres montañas son de 3 millas entre los montes Washington y Jefferson; de 2 millas entre los montes Jefferson y Adams, y de 5 millas entre los montes Adams y Washington. Comenzamos el primer día en la base del monte Washington y regresamos al mismo lugar al final de los 5 días. Nuestro objetivo era recorrer a pie tantas millas como pudiéramos. También decidimos escalar una montaña exactamente cada día y acampar en la base de la montaña que escalaríamos el siguiente día. Además, decidimos que no se podía visitar la misma montaña en dos días consecutivos. Utilice la PD para programar la caminata de 5 días.
+
+## Recursividad hacia delante (avance) y hacia atrás (retroceso)
+El primer ejemplo utiliza la recursividad hacia adelante en la cual los cálculos proceden de la etapa 1 a la etapa 3. El mismo ejemplo puede resolverse por medio de recursividad hacia atrás, comenzando en la etapa 3 y terminando en la etapa 1.
+
+![_Red de rutas para el ejemplo_](images/018-PD.png)
+
+La ecuación recursiva inversa es:
+
+$$
+f_4(x_4=7)=0\\
+f_i(x_i)=mín_{rutas\ factibles} \{d(x_i,x_{i+1})+f_{i+1}(x_{i+1})\}, i=1,2,3
+$$
+
+El orden de los cálculos es $f_3\rightarrow f_2\rightarrow f_1$.
